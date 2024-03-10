@@ -10,24 +10,24 @@ export default function App() {
 					<p className="font-bold">Eachann</p>
 				</NavbarBrand>
 			</Link>
-			<NavbarContent className="hidden sm:flex gap-4" justify="center">
-				<NavbarItem>
+			<NavbarContent className="sm:flex gap-4" justify="center">
+				{/* <NavbarItem>
 					<Link color="foreground" href="#">
-						Blog
+						Blog[未开发]
 					</Link>
-				</NavbarItem>
+				</NavbarItem> */}
 				<NavbarItem isActive>
-					<Link href="/books" aria-current="page">
+					<Link color="foreground" href="/books" aria-current="page">
 						Books
 					</Link>
 				</NavbarItem>
-				<NavbarItem>
+				{/* <NavbarItem>
 					<Link color="foreground" href="#">
-						Integrations
+						Integrations[未开发]
 					</Link>
-				</NavbarItem>
+				</NavbarItem> */}
 			</NavbarContent>
-			<NavbarContent justify="end">
+			{/* <NavbarContent justify="end">
 				<NavbarItem className="hidden lg:flex">
 					<Link href="#">Login</Link>
 				</NavbarItem>
@@ -36,7 +36,7 @@ export default function App() {
 						Sign Up
 					</Button>
 				</NavbarItem>
-			</NavbarContent>
+			</NavbarContent> */}
 		</Navbar>
 	)
 }

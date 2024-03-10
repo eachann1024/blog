@@ -4,26 +4,26 @@ import mockData from './mock'
 import { useEffect, useState } from 'react'
 
 // 每次mockData 数据改动重新输出
-console.log(11, mockData)
+// console.log(11, mockData)
 
 export default function Page() {
-const [isLoad, setIsLoad] = useState(false)
-const [data, setData] = useState<any[]>([])
+	const [isLoad, setIsLoad] = useState(false)
+	const [data, setData] = useState<any[]>([])
 
-useEffect(() => {
-  // 生成长度为mockData长度的空数组
-  setData([...Array(mockData.length).fill('')])
+	useEffect(() => {
+		// 生成长度为mockData长度的空数组
+		setData([...Array(mockData.length).fill('')])
 
-  setTimeout(() => {
-    setData(mockData)
-    setIsLoad(true)
-  }, 1000)
-}, [])
+		setTimeout(() => {
+			setData(mockData)
+			setIsLoad(true)
+		}, 1000)
+	}, [])
 	return (
-		<div className="w-1400px m-auto my-5 flex-middle  flex-wrap gap-3">
+		<div className=" w-full lg:w-1200px m-auto my-5 flex-middle  flex-wrap gap-3">
 			{data.map((item, index) => {
 				return (
-					<Card key={index} className="w-[300px] space-y-5 p-4 mb-3" radius="lg">
+					<Card key={index} className="w-[280px] space-y-5 p-4 mb-3" radius="lg">
 						<Card shadow="sm" key={index} isPressable onPress={() => console.log('item pressed')}>
 							<CardBody className="overflow-visible p-0">
 								{/* Skeleton */}
