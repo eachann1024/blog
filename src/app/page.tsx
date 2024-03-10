@@ -6,7 +6,7 @@ import { NextUIProvider } from '@nextui-org/react'
 export default function Home() {
 	return (
 		<NextUIProvider>
-			<h1 className='flex-middle text-xl mt10'>Index Page</h1>
+			<h1 className='text-xl mt20'>Index Page</h1>
 		</NextUIProvider>
 	)
 }
