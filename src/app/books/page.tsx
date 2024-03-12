@@ -2,9 +2,18 @@
 import { Card, Skeleton, CardHeader, CardBody, CardFooter, Divider, Link, Image } from '@nextui-org/react'
 import mockData from './mock'
 import { useEffect, useState } from 'react'
+import { getBooks } from '@/api/book'
 
-// 每次mockData 数据改动重新输出
-// console.log(11, mockData)
+const getData = async () => {
+	/* 
+	setTimeout(() => {
+			setData(mockData)
+			setIsLoad(true)
+		}, 1000) */
+	getBooks().then((res) => {
+		console.log(111, res)
+	})
+}
 
 export default function Page() {
 	const [isLoad, setIsLoad] = useState(false)
@@ -14,10 +23,7 @@ export default function Page() {
 		// 生成长度为mockData长度的空数组
 		setData([...Array(mockData.length).fill('')])
 
-		setTimeout(() => {
-			setData(mockData)
-			setIsLoad(true)
-		}, 1000)
+		getData()
 	}, [])
 	return (
 		<div className=" w-full lg:w-1200px m-auto my-5 flex-middle  flex-wrap gap-3">
