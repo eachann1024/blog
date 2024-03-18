@@ -17,11 +17,18 @@ axios.interceptors.request.use(
 	}
 )
 
-// 添加响应拦截器
 axios.interceptors.response.use(
 	(response) => {
-		// 对响应数据做点什么
-		return response
+		const { config, data, status } = response
+
+		const Res = {
+			data: data,
+			status,
+		}
+
+		console.log('%c [ 接口请求: ]', 'font-size:13px; background:pink; color:#bf2c9f;', Res)
+
+		return Res
 	},
 	(error) => {
 		// 对响应错误做点什么

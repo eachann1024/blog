@@ -1,54 +1,45 @@
 'use client'
-import { Card, Skeleton, CardHeader, CardBody, CardFooter, Divider, Link, Image } from '@nextui-org/react'
-import mockData from './mock'
+// import mockData from './mock'
 import { useEffect, useState } from 'react'
 import { getBooks } from '@/api/book'
-
-const getData = async () => {
-	/* 
-	setTimeout(() => {
-			setData(mockData)
-			setIsLoad(true)
-		}, 1000) */
-	getBooks().then((res) => {
-		console.log(111, res)
-	})
-}
+import BookCard from './bookCard'
+import AddBookModal from './addBookModal'
+import { Button } from '@nextui-org/react'
 
 export default function Page() {
-	const [isLoad, setIsLoad] = useState(false)
 	const [data, setData] = useState<any[]>([])
 
-	useEffect(() => {
-		// 生成长度为mockData长度的空数组
-		setData([...Array(mockData.length).fill('')])
+	const [state, setState] = useState({
+		pages:[],
+		total:0
+	})
+	// const [openStatus, setOpenStatus] = useState(false)
 
-		getData()
+	const [isOpen, setIsOpen] = useState(false)
+	const openModal = () => {
+		setIsOpen(true)
+	}
+
+	const getData = async () => {
+		const res = await getBooks()
+		console.log('%c [ res ]', 'font-size:13px; background:pink; color:#bf2c9f;', res)
+		setState(res.data)
+		// setData(res.data) // 设置数据
+	}
+
+	useEffect(() => {
+		getData() // 获取数据
 	}, [])
+
 	return (
-		<div className=" w-full lg:w-1200px m-auto my-5 flex-middle  flex-wrap gap-3">
-			{data.map((item, index) => {
-				return (
-					<Card key={index} className="w-[280px] space-y-5 p-4 mb-3" radius="lg">
-						<Card shadow="sm" key={index} isPressable onPress={() => console.log('item pressed')}>
-							<CardBody className="overflow-visible p-0">
-								{/* Skeleton */}
-								<Skeleton className="w-full h-[140px] rounded-t-lg" isLoaded={isLoad}>
-									<Image shadow="sm" radius="lg" width="100%" alt={item.title} className="w-full object-cover h-[140px]" src={item.cover} />
-								</Skeleton>
-							</CardBody>
-							<CardFooter>
-								<Skeleton className="flex-full h-4" isLoaded={isLoad}>
-									<div className="flex w-full text-small justify-between">
-										<b>{item.name}</b>
-										<p className="text-default-500">{item.author}</p>
-									</div>
-								</Skeleton>
-							</CardFooter>
-						</Card>
-					</Card>
-				)
-			})}
-		</div>
+		<>
+			<div className="flex-center justify-end mx-20">
+				<Button radius="full" className="px-5 bg-gradient-to-tr from-pink-200 to-yellow-200 text-black shadow-lg" onClick={openModal}>
+					新增表单
+				</Button>
+			</div>
+			<AddBookModal isOpen={isOpen} setIsOpen={setIsOpen} />
+			<BookCard data={state.pages} />
+		</>
 	)
 }

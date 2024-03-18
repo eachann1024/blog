@@ -1,7 +1,22 @@
-import { get } from './axios'
+import { get, post } from './axios'
+
+const URL = {
+	getBooks: '/book',
+	addBooks: '/book/add',
+}
 
 export async function getBooks() {
-	const res = await get('/book')
-	console.log('%c [ res ]', 'font-size:13px; background:pink; color:#bf2c9f;', res)
-	return res.data
+	return get(URL.getBooks)
+}
+
+export interface IAddBooks {
+	title: string
+	description: string
+	cover: string
+	author: string
+	category?: string
+}
+
+export async function addBooks(data: IAddBooks) {
+	return post(URL.addBooks, data)
 }
